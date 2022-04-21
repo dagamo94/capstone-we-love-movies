@@ -18,7 +18,7 @@
     "start:solution": "docker-compose up --build",
     "test": "jest",
     "test:solution": "docker-compose build && docker-compose run --rm api npm test && docker-compose down",
-    "create:migrations": "npx knex migrate:make moviesTable && npx knex migrate:make criticsTable && npx knex migrate:make theatersTable && npx knex migrate:make reviewsTable && npx knex migrate:create movies_theatersTable"
+    "create:migrations": "npx knex migrate:make moviesTable && npx knex migrate:make criticsTable && npx knex migrate:make theatersTable && npx knex migrate:make reviewsTable && npx knex migrate:make movies_theatersTable"
   },
   "keywords": [],
   "author": "",
