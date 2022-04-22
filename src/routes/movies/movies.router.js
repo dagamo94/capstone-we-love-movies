@@ -1,5 +1,7 @@
-const router = require("express").Router();
+const router = require("express").Router({mergeParams: true});
 const controller = require("./movies.controller");
+const theatersController = require("../theaters/theaters.controller");
+const reviewsController = require("../reviews/reviews.controller");
 const methodNotAllowed = require("../../errors/methodNotAllowed");
 
 router
@@ -12,5 +14,10 @@ router
     .route("/:movieId")
     .get(controller.read)
     .all(methodNotAllowed);
+
+// Make sure to adjust controller to handle these requests
+router.route("/:movieId/theaters").get(theatersController.list);
+
+router.route("/:movieId/critics").get(reviewsController.list);
 
 module.exports = router;
