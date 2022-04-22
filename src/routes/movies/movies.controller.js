@@ -1,4 +1,5 @@
 const service = require("./movies.service");
+const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
 
 async function movieExists(req, res, next){
     const {movieId} = req.params;
@@ -17,10 +18,8 @@ async function list(req, res) {
     res.json({ data });
 }
 
-async function read(req, res) {
-    const { movieId } = req.params;
-    const data = await service.read(movieId);
-    res.json({ data });
+function read(req, res) {
+    res.json({ data: res.locals.movie });
 }
 
 async function create(req, res) {
@@ -30,7 +29,7 @@ async function create(req, res) {
 }
 
 module.exports = {
-    list,
-    read,
-    create
+    list: [asyncErrorBoundary(list)],
+    read: [asyncErrorBoundary(movieExists),asyncErrorBoundary(read)],
+    create: [asyncErrorBoundary(create)]
 }
