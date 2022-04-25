@@ -15,6 +15,8 @@ router
     .get(controller.read)
     .all(methodNotAllowed);
 
+
+//  ************* IMPLEMENT WITH TABLE JOINS IN A SERVICE FILE????
 // Make sure to adjust controller to handle these requests
 router.route("/:movieId/theaters").get(theatersController.list);
 

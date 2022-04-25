@@ -22,14 +22,8 @@ function read(req, res) {
     res.json({ data: res.locals.movie });
 }
 
-async function create(req, res) {
-    const { data } = req.body;
-    const createdMovie = await service.create(data);
-    res.status(201).json({data: createdMovie});
-}
 
 module.exports = {
     list: [asyncErrorBoundary(list)],
-    read: [asyncErrorBoundary(movieExists),asyncErrorBoundary(read)],
-    create: [asyncErrorBoundary(create)]
+    read: [asyncErrorBoundary(movieExists),asyncErrorBoundary(read)]
 }
