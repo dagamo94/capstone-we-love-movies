@@ -1,4 +1,4 @@
-const router = require("express").Router({mergeParams: true});
+const router = require("express").Router({ mergeParams: true });
 const controller = require("./movies.controller");
 const theatersController = require("../theaters/theaters.controller");
 const reviewsController = require("../reviews/reviews.controller");
@@ -15,11 +15,15 @@ router
     .get(controller.read)
     .all(methodNotAllowed);
 
+router
+    .route("/:movieId/theaters")
+    .get(controller.listTheaters)
+    .all(methodNotAllowed);
 
-//  ************* IMPLEMENT WITH TABLE JOINS IN A SERVICE FILE????
-// Make sure to adjust controller to handle these requests
-router.route("/:movieId/theaters").get(theatersController.list);
+router
+    .route("/:movieId/reviews")
+    .get(controller.listReviews)
+    .all(methodNotAllowed);
 
-router.route("/:movieId/critics").get(reviewsController.list);
 
 module.exports = router;
